@@ -26,9 +26,10 @@ var tile_atlas_coords : Dictionary[TileType, Vector2i] = {
 }
 #all functions set up to control aspects such as state of tile and player position and harvesting
 func _ready():
-	for cell in tile_map.get_used_cells()
-		tile_info[cell] = TileInfo.new()
 	
+	for cell in tile_map.get_used_cells():
+		tile_info[cell] = TileInfo.new()
+
 func _on_new_day (day: int):
 	pass
 
@@ -52,7 +53,7 @@ func is_tile_watered(pos : Vector2) -> bool:
 	return false
 	
 func _set_tile_state(coords : Vector2i, tile_type : TileType):
-	tile_map.set.cell(coords, 0, tile_atlas_coords[tile_type])
+	tile_map.set_cell(coords,0,tile_atlas_coords[tile_type])
 	#sets the tile state depending on variable such as watered and tilled
 	match tile_type:
 		TileType.GRASS:
@@ -61,7 +62,7 @@ func _set_tile_state(coords : Vector2i, tile_type : TileType):
 		TileType.TILLED:
 			tile_info[coords].tilled = true
 			tile_info[coords].watered = false
-		TileType.watered:
+		TileType.TILLED_WATERED:
 			tile_info[coords].tilled = true
 			tile_info[coords].watered = true
 			
