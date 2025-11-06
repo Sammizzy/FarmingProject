@@ -29,7 +29,7 @@ func _ready():
 	
 	for cell in tile_map.get_used_cells():
 		tile_info[cell] = TileInfo.new()
-
+#functions to try and interact depending on action performed
 func _on_new_day (day: int):
 	pass
 
@@ -37,10 +37,27 @@ func _on_harvest_crop (crop : Crop):
 	pass
 
 func try_till_tile (player_pos : Vector2):
-	pass
+	var coords : Vector2i = tile_map.local_to_map(player_pos)
+	
+	if tile_info[coords].crop:
+		return
+		
+	if tile_info[coords].tilled:
+		return
+		
+	_set_tile_state(coords, TileType.TILLED)
 	
 func try_water_tile (player_pos : Vector2):
-	pass
+	var coords : Vector2i = tile_map.local_to_map(player_pos)
+	
+	if not tile_info[coords].tilled:
+		return
+		
+	_set_tile_state(coords, TileType.TILLED_WATERED)
+	
+	if tile_info[coords].crop:
+		tile_info[coords].crop.watered = true
+		
 	
 func try_seed_tile (player_pos : Vector2, crop_data : CropData):
 	pass

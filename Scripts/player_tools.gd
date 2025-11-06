@@ -12,7 +12,7 @@ enum Tool
 var current_tool : Tool
 var current_seed : CropData
 
-@onready var farm_manager : FarmManager
+@onready var farm_manager : FarmManager = $"../../FarmManager"
 
 func _ready():
 	current_tool = Tool.HOE
@@ -26,8 +26,10 @@ func _process(delta):
 		match current_tool:
 			Tool.HOE:
 				farm_manager.try_till_tile(global_position)
+				current_tool = Tool.WATER_BUCKET #remove
 			Tool.WATER_BUCKET:
 				farm_manager.try_water_tile(global_position)
+				current_tool = Tool.HOE
 			Tool.SCYTHE:
 				farm_manager.try_harvest_tile(global_position)
 			Tool.SEED:
