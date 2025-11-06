@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://bnaegj2duv1ca"]
+[gd_scene load_steps=34 format=4 uid="uid://bnaegj2duv1ca"]
 
 [ext_resource type="Script" uid="uid://d2fhsy1j8hyt5" path="res://Scripts/player.gd" id="1_bo1nx"]
 [ext_resource type="Texture2D" uid="uid://deu5pfr2jhyk5" path="res://Sprites/Player/Player.png" id="1_jjgbg"]
@@ -196,11 +196,6 @@ separation = Vector2i(1, 0)
 [sub_resource type="TileSet" id="TileSet_kry3j"]
 sources/0 = SubResource("TileSetAtlasSource_jjvhh")
 
-[sub_resource type="LabelSettings" id="LabelSettings_fdnlq"]
-font_size = 25
-shadow_size = 5
-shadow_color = Color(0, 0, 0, 0.8)
-
 [node name="Main" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -281,36 +276,6 @@ texture = ExtResource("11_k12tt")
 layout_mode = 2
 tool = 3
 seed = ExtResource("12_h1bgf")
-
-[node name="DayText" type="Label" parent="CanvasLayer"]
-offset_right = 123.0
-offset_bottom = 109.0
-text = "Day 50
-"
-label_settings = SubResource("LabelSettings_fdnlq")
-
-[node name="MoneyText" type="Label" parent="CanvasLayer"]
-offset_left = 2.0
-offset_top = 35.0
-offset_right = 125.0
-offset_bottom = 144.0
-text = "£300
-"
-label_settings = SubResource("LabelSettings_fdnlq")
-
-[node name="NextDayButton" type="Button" parent="CanvasLayer"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -121.0
-offset_top = 32.0
-offset_right = -42.0
-offset_bottom = 63.0
-grow_horizontal = 0
-theme_override_font_sizes/font_size = 25
-text = "Next Day"
-
-[connection signal="pressed" from="CanvasLayer/NextDayButton" to="CanvasLayer" method="_on_next_day_button_pressed"]
 
 [editable path="CanvasLayer/ToolButtons/Hoe"]
 [editable path="CanvasLayer/ToolButtons/WaterBucket"]
