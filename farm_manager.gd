@@ -60,10 +60,35 @@ func try_water_tile (player_pos : Vector2):
 		
 	
 func try_seed_tile (player_pos : Vector2, crop_data : CropData):
-	pass
+	var coords : Vector2i = tile_map.local_to_map(player_pos)
+	
+	if not tile_info[coords].tilled:
+		return
+		
+	if tile_info[coords].crop:
+		return
+		
+	#return if no seeds
+	
+	var crop : Crop = crop_scene.instantiate()
+	add_child(crop)
+	crop.global_position = tile_map.map_to_local(coords)
+	crop.set_crop(crop_data, is_tile_watered(coords), coords)
+	
+	tile_info[coords].crop = crop
+	#used the seed
 
 func try_harvest_tile (player_pos : Vector2):
-	pass
+	var coords : Vector2i = tile_map.local_to_map(player_pos)
+	
+	if not tile_info[coords].crop:
+		return
+		
+	if not tile_info[coords].crop.harvestable:
+		return
+	
+	#sell crop
+	tile_info[coords].crop = null
 	
 	
 func is_tile_watered(pos : Vector2) -> bool:
