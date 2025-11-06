@@ -1,13 +1,17 @@
-[gd_scene load_steps=30 format=4 uid="uid://bnaegj2duv1ca"]
+[gd_scene load_steps=33 format=4 uid="uid://bnaegj2duv1ca"]
 
 [ext_resource type="Script" uid="uid://d2fhsy1j8hyt5" path="res://Scripts/player.gd" id="1_bo1nx"]
 [ext_resource type="Texture2D" uid="uid://deu5pfr2jhyk5" path="res://Sprites/Player/Player.png" id="1_jjgbg"]
 [ext_resource type="Texture2D" uid="uid://btxrsecte87rv" path="res://Sprites/Tiles/Tileset.png" id="3_8gbba"]
 [ext_resource type="Script" uid="uid://mdda6e4cpl68" path="res://farm_manager.gd" id="3_jjvhh"]
 [ext_resource type="Script" uid="uid://cqtd2fj5ud2qu" path="res://Scripts/player_tools.gd" id="3_kry3j"]
-[ext_resource type="Texture2D" uid="uid://lngcmt2hdg2b" path="res://Sprites/UI/ItemBox.png" id="6_21xkr"]
-[ext_resource type="Texture2D" uid="uid://8i67gik0xi8s" path="res://Sprites/UI/CornSeed_Icon.png" id="7_6bp64"]
-[ext_resource type="Script" uid="uid://dffehvx810307" path="res://Scripts/tool_button.gd" id="7_344ge"]
+[ext_resource type="PackedScene" uid="uid://cebe52c54d0pn" path="res://Scenes/tool_button.tscn" id="6_21xkr"]
+[ext_resource type="Texture2D" uid="uid://bvev8bpr7fisa" path="res://Sprites/UI/Hoe_Icon.png" id="7_6iyac"]
+[ext_resource type="Texture2D" uid="uid://cb6qjgowlx2hx" path="res://Sprites/UI/WaterBucket_Icon.png" id="8_fdnlq"]
+[ext_resource type="Texture2D" uid="uid://dxaboeq4tskni" path="res://Sprites/UI/Scythe_Icon.png" id="9_jkdf5"]
+[ext_resource type="Resource" uid="uid://w0ujv5bngdhs" path="res://Crops/Tomato.tres" id="10_wsu2k"]
+[ext_resource type="Texture2D" uid="uid://b3qkv53bj6gtr" path="res://Sprites/UI/TomatoSeed_Icon.png" id="11_k12tt"]
+[ext_resource type="Resource" uid="uid://da3xivtp4e3nt" path="res://Crops/Corn.tres" id="12_h1bgf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8gbba"]
 radius = 7.0
@@ -191,11 +195,6 @@ separation = Vector2i(1, 0)
 [sub_resource type="TileSet" id="TileSet_kry3j"]
 sources/0 = SubResource("TileSetAtlasSource_jjvhh")
 
-[sub_resource type="LabelSettings" id="LabelSettings_6bp64"]
-font_size = 20
-shadow_size = 10
-shadow_color = Color(0, 0, 0, 0.6901961)
-
 [node name="Main" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -228,51 +227,56 @@ tile_set = SubResource("TileSet_kry3j")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="ToolButton" type="TextureButton" parent="CanvasLayer"]
-custom_minimum_size = Vector2(100, 100)
-offset_left = 142.0
-offset_top = 138.0
-offset_right = 242.0
-offset_bottom = 238.0
-texture_normal = ExtResource("6_21xkr")
-stretch_mode = 4
-script = ExtResource("7_344ge")
-
-[node name="Icon" type="TextureRect" parent="CanvasLayer/ToolButton"]
-layout_mode = 1
-anchors_preset = 8
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -30.0
-offset_top = -30.0
-offset_right = 30.0
-offset_bottom = 30.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("7_6bp64")
-
-[node name="QuantityText" type="Label" parent="CanvasLayer/ToolButton"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -99.0
-offset_top = -99.0
-offset_right = 1.0
-offset_bottom = -1.0
-grow_horizontal = 0
+offset_left = -295.0
+offset_top = -137.0
+offset_right = 285.0
+offset_bottom = -37.0
+grow_horizontal = 2
 grow_vertical = 0
-text = "50
-"
-label_settings = SubResource("LabelSettings_6bp64")
-horizontal_alignment = 2
-vertical_alignment = 2
+theme_override_constants/separation = 15
+alignment = 1
 
-[connection signal="mouse_entered" from="CanvasLayer/ToolButton" to="CanvasLayer/ToolButton" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/ToolButton" to="CanvasLayer/ToolButton" method="_on_mouse_exited"]
-[connection signal="pressed" from="CanvasLayer/ToolButton" to="CanvasLayer/ToolButton" method="_on_pressed"]
+[node name="Hoe" parent="CanvasLayer/HBoxContainer" instance=ExtResource("6_21xkr")]
+layout_mode = 2
+
+[node name="Icon" parent="CanvasLayer/HBoxContainer/Hoe" index="0"]
+texture = ExtResource("7_6iyac")
+
+[node name="WaterBucket" parent="CanvasLayer/HBoxContainer" instance=ExtResource("6_21xkr")]
+layout_mode = 2
+tool = 1
+
+[node name="Icon" parent="CanvasLayer/HBoxContainer/WaterBucket" index="0"]
+texture = ExtResource("8_fdnlq")
+
+[node name="Scythe" parent="CanvasLayer/HBoxContainer" instance=ExtResource("6_21xkr")]
+layout_mode = 2
+tool = 2
+
+[node name="Icon" parent="CanvasLayer/HBoxContainer/Scythe" index="0"]
+texture = ExtResource("9_jkdf5")
+
+[node name="TomatoSeed" parent="CanvasLayer/HBoxContainer" instance=ExtResource("6_21xkr")]
+layout_mode = 2
+tool = 3
+seed = ExtResource("10_wsu2k")
+
+[node name="Icon" parent="CanvasLayer/HBoxContainer/TomatoSeed" index="0"]
+texture = ExtResource("11_k12tt")
+
+[node name="CornSeed" parent="CanvasLayer/HBoxContainer" instance=ExtResource("6_21xkr")]
+layout_mode = 2
+tool = 3
+seed = ExtResource("12_h1bgf")
+
+[editable path="CanvasLayer/HBoxContainer/Hoe"]
+[editable path="CanvasLayer/HBoxContainer/WaterBucket"]
+[editable path="CanvasLayer/HBoxContainer/Scythe"]
+[editable path="CanvasLayer/HBoxContainer/TomatoSeed"]
+[editable path="CanvasLayer/HBoxContainer/CornSeed"]

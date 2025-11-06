@@ -5,13 +5,14 @@ extends TextureButton
 @export var seed : CropData
 
 @onready var quantity_text : Label = $QuantityText
-
+#all the functions with the item boxes, resizing when hovering over them, selecting
 func _ready():
 	quantity_text.text = ""
 	pivot_offset = size / 2
 
 
 func _on_pressed():
+	#set player tool signal emit
 	pass # Replace with function body.
 
 
@@ -23,3 +24,10 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	scale.x = 1
 	scale.y = 1
+
+
+func _on_change_seed_quantity (crop_data : CropData, quantity : int):
+	if seed != crop_data:
+		return
+		
+	quantity_text.text = str(quantity)
