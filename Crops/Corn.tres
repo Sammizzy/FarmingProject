@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CropData" load_steps=7 format=3 uid="uid://da3xivtp4e3nt"]
+
+[ext_resource type="Texture2D" uid="uid://c5iedsyd4sbq8" path="res://Sprites/Crops/Corn/corn_growth_0.tres" id="1_4ygg0"]
+[ext_resource type="Script" uid="uid://38durq0doqvl" path="res://Scripts/crop_data.gd" id="1_xac2j"]
+[ext_resource type="Texture2D" uid="uid://c0d1qbmi2w8xh" path="res://Sprites/Crops/Corn/corn_growth_1.tres" id="2_21iuq"]
+[ext_resource type="Texture2D" uid="uid://cbt2mfd1naft8" path="res://Sprites/Crops/Corn/corn_growth_2.tres" id="3_fx01v"]
+[ext_resource type="Texture2D" uid="uid://b5acet1j6p7yu" path="res://Sprites/Crops/Corn/corn_growth_3.tres" id="4_1joqo"]
+[ext_resource type="Texture2D" uid="uid://yyu53i7hmv7h" path="res://Sprites/Crops/Corn/corn_growth_4.tres" id="5_ryl74"]
+
+[resource]
+script = ExtResource("1_xac2j")
+growth_sprites = Array[Texture]([ExtResource("1_4ygg0"), ExtResource("2_21iuq"), ExtResource("3_fx01v"), ExtResource("4_1joqo"), ExtResource("5_ryl74")])
+metadata/_custom_type_script = "uid://38durq0doqvl"
