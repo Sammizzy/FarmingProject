@@ -1,6 +1,6 @@
 class_name Crop
 extends Node2D
-
+#all data for crops and planting crops
 var crop_data : CropData
 var days_until_grown : int
 var watered : bool
@@ -8,16 +8,16 @@ var harvestable : bool
 var tile_map_coords : Vector2i
 
 @onready var sprite : Sprite2D = $Sprite
-
+#start of new day connect to GameManager
 func _ready ():
 	GameManager.NewDay.connect(_on_new_day)
-
+#find correct tile and give correct response
 func set_crop (data : CropData, already_watered : bool, tile_coords : Vector2i):
 	crop_data = data
 	watered = already_watered
 	tile_map_coords = tile_coords
 	harvestable = false
-	
+#which sprite to show after how many days
 	days_until_grown = data.days_to_grow
 	sprite.texture = crop_data.growth_sprites[0]
 
@@ -32,7 +32,7 @@ func _on_new_day (day: int):
 	else:
 		harvestable = true
 		
-	
+	#which sprite to use for which growth phase
 	var sprite_count : int = len(crop_data.growth_sprites)
 	var growth_percent : float = (crop_data.days_to_grow - days_until_grown) / float(crop_data.days_to_grow)
 	var index : int = floor(growth_percent * sprite_count)
