@@ -1,6 +1,6 @@
 class_name FarmManager
 extends Node
-
+#different tool types
 enum TileType
 {
 	GRASS,
@@ -8,23 +8,23 @@ enum TileType
 	TILLED_WATERED
 }
 
-
+#different tile types
 class TileInfo:
 	var tilled : bool
 	var watered : bool
 	var crop : Crop
-
+#define the tiles within map
 @onready var tile_map : TileMapLayer = $FarmTileMap
 var tile_info : Dictionary[Vector2i, TileInfo]
 var crop_scene : PackedScene = preload("res://Scenes/crop.tscn")
-
+#coords of all tiles
 var tile_atlas_coords : Dictionary[TileType, Vector2i] = {
 	TileType.GRASS: Vector2i(0,0),
 	TileType.TILLED: Vector2i(1,0),
 	TileType.TILLED_WATERED: Vector2i(0,1)
 	
 }
-
+#load sounds when played
 @onready var till_sound : AudioStreamPlayer = $TillSound
 @onready var plant_seed_sound : AudioStreamPlayer = $PlantSeedSound
 @onready var water_sound : AudioStreamPlayer = $WaterSound
